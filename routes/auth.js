@@ -6,9 +6,12 @@ const router = express.Router();
 
 const User = require('../models/user');
 
-/* GET users listing. */
-router.get('/', (req, res, next) => {
-  res.send('respond with a resource');
+router.get('/me', (req, res, next) => {
+  if (req.session.currentUser) {
+    res.json(req.session.currentUser);
+  } else {
+    res.status(404).json({code: 'not-found'});
+  }
 });
 
 router.post('/login', (req, res, next) => {
@@ -70,6 +73,11 @@ router.post('/signup', (req, res, next) => {
         });
     })
     .catch(next);
+});
+
+router.get('/logout', (req, res) => {
+  delete req.session.currentUser;
+  return res.status(204).send();
 });
 
 module.exports = router;
