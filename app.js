@@ -18,7 +18,7 @@ const app = express();
 // ---- database
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/book-affinity', {
+mongoose.connect('mongodb://localhost/book-addicted', {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE
 });
