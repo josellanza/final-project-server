@@ -5,14 +5,14 @@ const router = express.Router();
 
 const Book = require('../models/book');
 
-router.post('/book', (req, res, next) => {
-  const book = req.body.book;
+router.post('/', (req, res, next) => {
+  const book = req.body.book.kind;
   const newBook = Book({
     book
   });
-  return newBook.save()
+  newBook.save()
     .then(() => {
-      req.body.book = newBook;
+      req.book = newBook;
       res.json(newBook);
     })
     .catch(next);
