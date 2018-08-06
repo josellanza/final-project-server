@@ -13,6 +13,9 @@ const bookSchema = new Schema({
   image: {
     type: String
   },
+  price: {
+    type: Number
+  },
   apiBookId: {
     type: String
   }
