@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = Schema.Types.ObjectId;
 
 const bookSchema = new Schema({
   title: {
@@ -16,6 +17,17 @@ const bookSchema = new Schema({
   price: {
     type: Number
   },
+  votes: [{
+    type: Number
+  }],
+  comments: [{
+    type: ObjectId,
+    ref: 'User'
+  },
+  {
+    type: String
+  }
+  ],
   apiBookId: {
     type: String
   }
