@@ -10,19 +10,25 @@ router.post('/add', (req, res, next) => {
   const author = req.body.items[0].volumeInfo.authors[0];
   const apiBookId = req.body.items[0].id;
   const image = req.body.items[0].volumeInfo.imageLinks.thumbnail;
+  Book.findOne({apiBookId}, 'username')
+    .then((bookExists) => {
+      if (bookExists) {
+        return res.status(401).json({code: 'unauthorized'});
+      }
+      const data = {
+        title,
+        author,
+        apiBookId,
+        image
+      };
+      const newBook = Book(data);
 
-  const data = {
-    title,
-    author,
-    apiBookId,
-    image
-  };
-  const newBook = Book(data);
-  newBook.save()
-    .then(() => {
-      res.json(newBook);
-    })
-    .catch(next);
+      return newBook.save()
+        .then(() => {
+          res.json(newBook);
+        })
+        .catch(next);
+    });
 });
 
 module.exports = router;
