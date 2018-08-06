@@ -7,9 +7,10 @@ const Book = require('../models/book');
 
 router.post('/add', (req, res, next) => {
   const title = req.body.items[0].volumeInfo.title;
-  const author = req.body.items[0].volumeInfo.authors[0];
+  const author = req.body.items[0].volumeInfo.authors;
   const apiBookId = req.body.items[0].id;
   const image = req.body.items[0].volumeInfo.imageLinks.thumbnail;
+  const pageCount = req.body.items[0].volumeInfo.pageCount;
 
   const saleInfo = req.body.items[0].saleInfo;
   const lengthSaleInfo = Object.keys(saleInfo).length;
@@ -26,7 +27,8 @@ router.post('/add', (req, res, next) => {
           author,
           apiBookId,
           image,
-          price
+          price,
+          pageCount
         };
         const newBook = Book(data);
         return newBook.save()
@@ -39,7 +41,8 @@ router.post('/add', (req, res, next) => {
           title,
           author,
           apiBookId,
-          image
+          image,
+          pageCount
         };
         const newBook = Book(data);
 

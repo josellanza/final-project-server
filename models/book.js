@@ -8,13 +8,16 @@ const bookSchema = new Schema({
   title: {
     type: String
   },
-  author: {
+  author: [{
     type: String
-  },
+  }],
   image: {
     type: String
   },
   price: {
+    type: Number
+  },
+  pageCount: {
     type: Number
   },
   votes: [{
