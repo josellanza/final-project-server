@@ -18,9 +18,11 @@ router.post('/add', (req, res, next) => {
   Book.findOne({apiBookId}, 'username')
     .then((bookExists) => {
       if (bookExists) {
-        return res.status(401).json({code: 'unauthorized'});
-      }
-      if (lengthSaleInfo > 4) {
+        Book.findById(bookExists)
+          .then((book) => {
+            return res.json(book);
+          });
+      } else if (lengthSaleInfo > 4) {
         const price = req.body.items[0].saleInfo.listPrice.amount;
         const data = {
           title,
