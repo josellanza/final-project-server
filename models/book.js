@@ -10,8 +10,11 @@ const bookSchema = new Schema({
   author: {
     type: String
   },
-  year: {
-    type: Number
+  image: {
+    type: String
+  },
+  apiBookId: {
+    type: String
   }
 });
 
