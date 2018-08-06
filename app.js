@@ -10,6 +10,7 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 
 const auth = require('./routes/auth');
+const book = require('./routes/book');
 
 // ---- instantiations
 
@@ -50,6 +51,7 @@ app.use(session({
 // --- routes
 
 app.use('/auth', auth);
+app.use('/book', book);
 
 // --- error handling
 
