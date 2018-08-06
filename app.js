@@ -8,7 +8,7 @@ const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
-
+const bodyParser = require('body-parser');
 const auth = require('./routes/auth');
 const book = require('./routes/book');
 
@@ -34,6 +34,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser());
 
 app.use(session({
   store: new MongoStore({

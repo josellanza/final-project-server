@@ -6,9 +6,16 @@ const router = express.Router();
 const Book = require('../models/book');
 
 router.post('/add', (req, res, next) => {
-  const book = req.body.kind;
+  const title = req.body.items[0].volumeInfo.title;
+  const author = req.body.items[0].volumeInfo.title;
+  const image = req.body.items[0].volumeInfo.title;
 
-  const newBook = Book({book});
+  const data = {
+    title,
+    author,
+    image
+  };
+  const newBook = Book(data);
   newBook.save()
     .then(() => {
       res.json(newBook);

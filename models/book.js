@@ -6,6 +6,12 @@ const Schema = mongoose.Schema;
 const bookSchema = new Schema({
   title: {
     type: String
+  },
+  author: {
+    type: String
+  },
+  year: {
+    type: Number
   }
 });
 
