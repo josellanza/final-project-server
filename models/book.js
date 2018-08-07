@@ -20,6 +20,12 @@ const bookSchema = new Schema({
   pageCount: {
     type: Number
   },
+  publishedDate: {
+    type: String
+  },
+  publisher: {
+    type: String
+  },
   votes: [{
     type: Number
   }],
