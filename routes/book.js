@@ -1,13 +1,9 @@
 'use strict';
 
 const express = require('express');
-// const axios = require('axios');
 const router = express.Router();
 
 const Book = require('../models/book');
-
-// axios.get('https://www.googleapis.com/books/v1/volumes/?q=')
-//   .then();
 
 router.post('/score', (req, res, next) => {
   const bookId = req.body.book._id;
@@ -28,7 +24,7 @@ router.post('/score', (req, res, next) => {
 });
 
 router.get('/get', (req, res, next) => {
-  Book.find().limit(8)
+  Book.find().limit(24)
     .then((data) => {
       return res.json(data);
     })
