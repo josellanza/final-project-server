@@ -9,6 +9,14 @@ const Book = require('../models/book');
 // axios.get('https://www.googleapis.com/books/v1/volumes/?q=')
 //   .then();
 
+router.get('/get', (req, res, next) => {
+  Book.find().limit(8)
+    .then((data) => {
+      return res.json(data);
+    })
+    .catch(next);
+});
+
 router.post('/add', (req, res, next) => {
   const title = req.body.items[0].volumeInfo.title;
   const author = req.body.items[0].volumeInfo.authors;
