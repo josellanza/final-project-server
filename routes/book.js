@@ -9,6 +9,24 @@ const Book = require('../models/book');
 // axios.get('https://www.googleapis.com/books/v1/volumes/?q=')
 //   .then();
 
+router.post('/score', (req, res, next) => {
+  const bookId = req.body.book._id;
+  const score = req.body.score;
+
+  Book.findById(bookId)
+    .then((result) => {
+      result.votes.push(score);
+      let sum = result.votes.reduce((a, b) => {
+        return a + b;
+      });
+      result.average = Math.round((sum / result.votes.length) * 10) / 10;
+      result.save()
+        .then((result) => {
+          res.json(result);
+        });
+    }).catch(next);
+});
+
 router.get('/get', (req, res, next) => {
   Book.find().limit(8)
     .then((data) => {
@@ -30,7 +48,7 @@ router.post('/add', (req, res, next) => {
   const saleInfo = req.body.items[0].saleInfo;
   const lengthSaleInfo = Object.keys(saleInfo).length;
 
-  Book.findOne({apiBookId}, 'username')
+  Book.findOne({apiBookId})
     .then((bookExists) => {
       if (bookExists) {
         Book.findById(bookExists)

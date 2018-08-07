@@ -29,6 +29,9 @@ const bookSchema = new Schema({
   votes: [{
     type: Number
   }],
+  average: {
+    type: Number
+  },
   comments: [{
     type: ObjectId,
     ref: 'User'
