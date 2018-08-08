@@ -2,7 +2,6 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const ObjectId = Schema.Types.ObjectId;
 
 const bookSchema = new Schema({
   title: {
@@ -30,16 +29,12 @@ const bookSchema = new Schema({
     type: Number
   }],
   average: {
-    type: Number
+    type: String,
+    default: '-'
   },
   comments: [{
-    type: ObjectId,
-    ref: 'User'
-  },
-  {
     type: String
-  }
-  ],
+  }],
   apiBookId: {
     type: String
   }

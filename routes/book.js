@@ -5,6 +5,20 @@ const router = express.Router();
 
 const Book = require('../models/book');
 
+router.post('/comment', (req, res, next) => {
+  const bookId = req.body.book._id;
+  const comment = req.body.comment;
+  Book.findById(bookId)
+    .then((result) => {
+      result.comments.push(comment);
+      result.save()
+        .then((result) => {
+          res.json(result);
+        });
+    })
+    .catch(next);
+});
+
 router.post('/score', (req, res, next) => {
   const bookId = req.body.book._id;
   const score = req.body.score;
@@ -12,6 +26,7 @@ router.post('/score', (req, res, next) => {
   Book.findById(bookId)
     .then((result) => {
       result.votes.push(score);
+
       let sum = result.votes.reduce((a, b) => {
         return a + b;
       });
