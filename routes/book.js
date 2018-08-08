@@ -8,7 +8,7 @@ const Book = require('../models/book');
 router.post('/comment', (req, res, next) => {
   const bookId = req.body.book._id;
   const comment = req.body.comment;
-  const user = req.session.currentUser;
+  const user = req.session.currentUser.username;
   Book.findById(bookId)
     .then((result) => {
       result.comments.push({body: comment, owner: user});

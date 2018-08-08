@@ -35,11 +35,11 @@ const bookSchema = new Schema({
   },
   comments: [{
     body: {
-      type: String
+      type: String,
+      require: true
     },
     owner: {
-      type: ObjectId,
-      ref: 'User'
+      type: String
     }
   }],
   apiBookId: {
